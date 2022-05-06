@@ -2,6 +2,7 @@ package com.akhilexpress.hibernate.hibernate_first_project;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import com.akhilexpress.entity.Song;
 import com.akhilexpress.utils.HibernateUtils;
@@ -15,19 +16,30 @@ public class ReadApp {
 
 		// Initialize session object
 		Session session = sessionFactory.openSession();
-		
 
-		session.beginTransaction();
+		Transaction tnx = session.beginTransaction();
 
-		Song song=session.get(Song.class, 1);
+		try {
+			Song song = session.get(Song.class, 1);
 
-		session.getTransaction().commit();
+			System.out.println("does song object managed by session : " + session.contains(song));// true
 
-		System.out.println("Song fetched.."+song);
+			tnx.commit();
 
-		session.close();
+			System.out.println("Song fetched.." + song);
+
+			session.detach(song);
+
+			System.out.println("does song object managed by session : " + session.contains(song));// false
+
+			session.close();
+
+			System.out.println("does song object managed by session : " + session.contains(song));// exception
+
+		} catch (Exception e) {
+			tnx.rollback();
+		}
 
 	}
-
 
 }

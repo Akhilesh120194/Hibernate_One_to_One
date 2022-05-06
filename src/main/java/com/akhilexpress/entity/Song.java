@@ -2,12 +2,16 @@ package com.akhilexpress.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
+//MYSql doesn't support sequence generatioType
 @Entity
 public class Song {
 
 	@Id
+	@Column(name="songId")
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int songId;
 	
 	@Column(name="songName")
@@ -22,7 +26,7 @@ public class Song {
 	
 	
 	public Song(int songId, String songName, String artist) {
-		super();
+	
 		this.songId = songId;
 		this.songName = songName;
 		this.artist = artist;

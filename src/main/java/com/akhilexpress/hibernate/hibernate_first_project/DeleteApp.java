@@ -2,6 +2,7 @@ package com.akhilexpress.hibernate.hibernate_first_project;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
 
@@ -17,21 +18,22 @@ public class DeleteApp {
 
 		// Initialize session object
 		Session session = sessionFactory.openSession();
-		
 
-		session.beginTransaction();
+		Transaction tnx = session.beginTransaction();
 
-		Song song=session.get(Song.class, 2);
-		session.delete(song);
+		try {
+			Song song = session.get(Song.class, 2);
+			session.delete(song);
 
-		session.getTransaction().commit();
+			session.getTransaction().commit();
 
-		System.out.println("Song deleted..");
+			System.out.println("Song deleted..");
 
-		session.close();
+			session.close();
+		} catch (Exception e) {
+			tnx.rollback();
+		}
 
 	}
-
-	
 
 }
