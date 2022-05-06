@@ -4,7 +4,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-import com.akhilexpress.entity.Song;
+import com.akhilexpress.entity.Address;
+import com.akhilexpress.entity.Student;
 import com.akhilexpress.utils.HibernateUtils;
 
 public class CreatedApp {
@@ -13,26 +14,27 @@ public class CreatedApp {
 
 		// create configuration
 		SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-
-		// Initialize session object
+		
+		Address address=new Address();
+		address.setAddressLine1("mig-778");
+		address.setAddressLine2("colony");
+		address.setCity("Morena");
+		
+		Student student=new Student();
+		student.setName("Akhilesh");
+		student.setMobile(74774747);
+		student.setAddress(address);
+	
 		Session session = sessionFactory.openSession();
-		Song song = new Song();
-		song.setSongName("Dhoom macha le ");
-		song.setArtist("Shreya");
-
-		Transaction tnx = session.beginTransaction();
+		Transaction transaction = session.beginTransaction();
 		try {
-			session.save(song);
-
-			tnx.commit();
-
-			System.out.println("Song saved..Check DB");
-
-			session.close();
+			session.save(student);
+			transaction.commit();
+			
 		} catch (Exception e) {
-			tnx.rollback();
+
+				transaction.rollback();
 		}
 
 	}
-
 }

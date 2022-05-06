@@ -22,5 +22,8 @@
 		<property name="hibernate.show_sql">true</property>
 		
 		<property name="hibernate.format_sql">true</property>
+		
+		<!-- It will create the table if not exist if exist then it first drop the existing one and then create new one  -->
+		<property name="hibernate.hbm2ddl.auto">update</property> 
 	</session-factory>
 </hibernate-configuration>
