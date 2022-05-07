@@ -1,9 +1,6 @@
 package com.akhilexpress.entity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,23 +19,11 @@ public class Student {
 	private String name ;
 	private long mobile;
 	
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name="addressLine1",column=@Column(name="home_address_line1")),
-		 @AttributeOverride(name="addressLine2",column=@Column(name="home_address_line2")),
-		 @AttributeOverride(name="city",column=@Column(name="home_city"))
-	})
-	private Address homeAddress;
+	private int age ;
 	
-	@Embedded
-	@AttributeOverrides({ @AttributeOverride(name="addressLine1",column=@Column(name="hostel_address_line1")),
-		 @AttributeOverride(name="addressLine2",column=@Column(name="hostel_address_line2")),
-		 @AttributeOverride(name="city",column=@Column(name="hostel_city"))
-	})
-	private Address hostelAddress;
-
+	private  String country;
 	
 	
-
 	public Student() {
 		
 	}
@@ -70,27 +55,27 @@ public class Student {
 		this.mobile = mobile;
 	}
 
-	
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", mobile=" + mobile + ", homeAddress=" + homeAddress
-				+ ", hostelAddress=" + hostelAddress + "]";
-	}
-
-	public Address getHomeAddress() {
-		return homeAddress;
-	}
-
-	public void setHomeAddress(Address homeAddress) {
-		this.homeAddress = homeAddress;
-	}
-
-	public Address getHostelAddress() {
-		return hostelAddress;
-	}
-
-	public void setHostelAddress(Address hostelAddress) {
-		this.hostelAddress = hostelAddress;
+		return "Student [id=" + id + ", name=" + name + ", mobile=" + mobile + ", age=" + age + ", country=" + country
+				+ "]";
 	}
 
 	
