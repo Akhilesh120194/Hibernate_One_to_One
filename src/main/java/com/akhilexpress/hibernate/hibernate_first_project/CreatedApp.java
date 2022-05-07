@@ -14,7 +14,7 @@ public class CreatedApp {
 
 		// create configuration
 		SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
-		
+/*		
 		Address address=new Address();
 		address.setAddressLine1("mig-778");
 		address.setAddressLine2("colony");
@@ -34,7 +34,7 @@ public class CreatedApp {
 		} catch (Exception e) {
 
 				transaction.rollback();
-		}
+		}*/
 
 	}
 }

@@ -1,6 +1,9 @@
 package com.akhilexpress.entity;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,7 +22,22 @@ public class Student {
 	private String name ;
 	private long mobile;
 	
-	private Address address;
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name="addressLine1",column=@Column(name="home_address_line1")),
+		 @AttributeOverride(name="addressLine2",column=@Column(name="home_address_line2")),
+		 @AttributeOverride(name="city",column=@Column(name="home_city"))
+	})
+	private Address homeAddress;
+	
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name="addressLine1",column=@Column(name="hostel_address_line1")),
+		 @AttributeOverride(name="addressLine2",column=@Column(name="hostel_address_line2")),
+		 @AttributeOverride(name="city",column=@Column(name="hostel_city"))
+	})
+	private Address hostelAddress;
+
+	
+	
 
 	public Student() {
 		
@@ -52,18 +70,30 @@ public class Student {
 		this.mobile = mobile;
 	}
 
+	
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", mobile=" + mobile + "]";
+		return "Student [id=" + id + ", name=" + name + ", mobile=" + mobile + ", homeAddress=" + homeAddress
+				+ ", hostelAddress=" + hostelAddress + "]";
 	}
 
-	public Address getAddress() {
-		return address;
+	public Address getHomeAddress() {
+		return homeAddress;
 	}
 
-	public void setAddress(Address address) {
-		this.address = address;
+	public void setHomeAddress(Address homeAddress) {
+		this.homeAddress = homeAddress;
 	}
+
+	public Address getHostelAddress() {
+		return hostelAddress;
+	}
+
+	public void setHostelAddress(Address hostelAddress) {
+		this.hostelAddress = hostelAddress;
+	}
+
+	
 	
 	
 

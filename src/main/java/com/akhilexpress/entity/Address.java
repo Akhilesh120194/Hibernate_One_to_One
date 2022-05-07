@@ -5,11 +5,11 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-	@Column(name="address_line1")
+	
 	public String addressLine1;
-	@Column(name="address_line2")
+	
 	public String addressLine2;
-	@Column(name="city")
+	
 	public String city;
 
 	public Address() {
