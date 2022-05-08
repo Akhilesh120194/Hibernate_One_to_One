@@ -5,10 +5,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="students")
+/*@NamedQuery(name="myapp.allstudents",query="from Student")
+@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like '%a%'")
+*/
+@NamedQueries(
+		value={
+				@NamedQuery(name="myapp.allstudents",query="from Student"),
+				//	@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like '%a%'")
+				@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like :substring")
+
+		})
 public class Student {
 	
 	@Id
