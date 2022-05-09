@@ -1,79 +1,60 @@
 package com.akhilexpress.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="students")
-/*@NamedQuery(name="myapp.allstudents",query="from Student")
-@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like '%a%'")
-*/
-@NamedQueries(
-		value={
-				@NamedQuery(name="myapp.allstudents",query="from Student"),
-				//	@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like '%a%'")
-				@NamedQuery(name="myapp.allstudents.namelike",query="from Student where name like :substring")
-
-		})
+@Table(name = "student")
 public class Student {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "student_id")
 	private int id;
-	
-	@Column(name="student_name",length=70,nullable=false)
-	private String name ;
-	private long mobile;
-	
-	private int age ;
-	
-	private  String country;
-	
-	
+
+	@Column(name = "student_name")
+	private String name;
+
+	@Column(name = "student_country")
+	private String country;
+
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name = "passport_id")
+	private Passport passport;
+
 	public Student() {
-		
+
 	}
-	
-	public Student(int id, String name, long mobile) {
-	
+
+	public Student(int id, String name, String country) {
+System.out.println("jb");
 		this.id = id;
 		this.name = name;
-		this.mobile = mobile;
+		this.country = country;
 	}
-	
-	
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
-	}
-	public long getMobile() {
-		return mobile;
-	}
-	public void setMobile(long mobile) {
-		this.mobile = mobile;
-	}
-
-
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
 	}
 
 	public String getCountry() {
@@ -84,13 +65,19 @@ public class Student {
 		this.country = country;
 	}
 
-	@Override
-	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", mobile=" + mobile + ", age=" + age + ", country=" + country
-				+ "]";
+	public Passport getPassport() {
+		return passport;
 	}
 
-	
+	public void setPassport(Passport passport) {
+		System.out.println("hello");
+		this.passport = passport;
+	}
+
+	@Override
+	public String toString() {
+		return "Student [id=" + id + ", name=" + name + ", country=" + country + ", passport=" + passport + "]";
+	}
 	
 	
 

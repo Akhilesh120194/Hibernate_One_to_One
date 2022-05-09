@@ -3,6 +3,7 @@ package com.akhilexpress.utils;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.akhilexpress.entity.Passport;
 import com.akhilexpress.entity.Student;
 
 public class HibernateUtils {
@@ -14,6 +15,7 @@ public class HibernateUtils {
 			Configuration configuration = new Configuration();
 			configuration.configure("hibernate.cfg.xml");
 			configuration.addAnnotatedClass(Student.class);
+			configuration.addAnnotatedClass(Passport.class);
 			// create session factory
 
 		sessionFactory = configuration.buildSessionFactory();
